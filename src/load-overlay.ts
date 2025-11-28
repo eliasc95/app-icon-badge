@@ -10,9 +10,8 @@ type Params = {
 
 const HEX_COLOR_REGEX = /^#[0-9a-fA-F]{6}$/;
 type ReadResult = Awaited<ReturnType<typeof Jimp.read>>;
-export async function loadOverlay({ path, background }: Params) {
+export async function loadOverlay({ path, background }: Params): Promise<JimpInstance> {
   const bannerOverlay = await Jimp.read(path);
-  console.log(bannerOverlay);
 
   if (background !== undefined && !HEX_COLOR_REGEX.test(background)) {
     console.warn(
@@ -38,7 +37,7 @@ type ParamsRC = {
   to: string;
 };
 
-const replaceColor = ({ image, from, to }: ParamsRC) => {
+const replaceColor = ({ image, from, to }: ParamsRC): JimpInstance => {
   const fromColor = convert.hex.lab(from); // [R, G, B]
   const toColor = convert.hex.rgb(to); // [R, G, B]
 
