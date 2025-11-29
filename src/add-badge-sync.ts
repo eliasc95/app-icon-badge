@@ -42,14 +42,14 @@ export function addBadgeSync({
     for (let i = 0; i < badges.length; i++) {
       const badge = badges[i];
       
-      let cmd = `node "${path.resolve(__dirname, '../dist/cli.js')}" "${currentInputFile}" -t ${badge.type} -x "${badge.text}" -c ${badge.color || 'white'}`;
+      let cmd = `node "${path.resolve(__dirname, '../dist/cli.js')}" "${currentInputFile}" -t ${badge?.type} -x "${badge?.text}" -c ${badge?.color || 'white'}`;
       
-      if (badge.background) {
+      if (badge?.background) {
         cmd += ` -b "${badge.background}"`;
       }
       
-      if ((badge as any).position) {
-        cmd += ` -p ${(badge as any).position}`;
+      if (badge?.position) {
+        cmd += ` -p ${badge.position}`;
       }
       
       // Execute badge generation
